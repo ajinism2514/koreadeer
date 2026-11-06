@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>조선양록회 &amp; 슬로우라이프</title>
+<meta name="theme-color" content="#0d0b09">
+<link rel="icon" href="icon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32.png">
+<link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Dokdo&family=Song+Myung&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0b09; --ink-2:#17130f; --card:#1c1814; --line:rgba(216,178,106,.22);
+  --paper:#efe4cf; --muted:#a8987d; --gold:#d8b26a; --gold-2:#a8823f; --red:#a3241c; --red-2:#c9372a; --navy:#24304a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink)}
+body{word-break:keep-all;font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--paper);-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:
+    radial-gradient(900px 400px at 50% -120px,rgba(163,36,28,.18),transparent 70%),
+    linear-gradient(180deg,#120f0c,var(--ink) 400px)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ============ 헤더 ============ */
+header{position:sticky;top:0;z-index:10;background:rgba(13,11,9,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:28px;height:72px}
+.brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.brand img{width:44px;height:44px;border-radius:11px;box-shadow:0 0 0 1px rgba(216,178,106,.5),0 4px 12px rgba(0,0,0,.5)}
+.brand .name{font-family:'Dokdo',cursive;font-size:28px;line-height:.9;color:#fbf4e6;-webkit-text-stroke:.03em #fbf4e6;letter-spacing:-.04em}
+.brand .name small{display:block;font-size:.58em;color:#e9dcc0;-webkit-text-stroke:0}
+nav.menu{display:flex;gap:4px;flex:1;justify-content:center}
+nav.menu a{position:relative;padding:10px 16px;font-family:'Song Myung',serif;font-size:17px;letter-spacing:.06em;color:#cdbf9f;border-radius:4px;transition:color .2s}
+nav.menu a:hover{color:#fff}
+nav.menu a.on{color:var(--gold)}
+nav.menu a.on::after{content:"";position:absolute;left:16px;right:16px;bottom:2px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.social{display:flex;gap:8px;flex:0 0 auto}
+.social a{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(239,228,207,.06);
+  border:1px solid rgba(216,178,106,.25);transition:background .2s}
+.social a:hover{background:rgba(216,178,106,.15)}
+.social svg{width:18px;height:18px}
+
+/* ============ 본문 ============ */
+main{padding:22px 0 60px}
+.hello{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+.hello h1{font-family:'Song Myung',serif;font-weight:400;font-size:22px}
+.hello h1 b{color:var(--gold);font-weight:400}
+.hello span{font-size:13px;color:var(--muted)}
+
+.sec-title{display:flex;align-items:center;gap:8px;font-family:'Song Myung',serif;font-size:19px;margin:20px 0 10px;color:#f3e8d2}
+.sec-title .more{margin-left:auto;font-family:'Noto Sans KR';font-size:13px;color:var(--muted)}
+.sec-title::after{content:"";flex:0 0 0}
+.sec-title.first{margin-top:16px}
+.card{background:linear-gradient(180deg,var(--card),var(--ink-2));border:1px solid var(--line);border-radius:6px;position:relative}
+
+/* 공지 (접기/펼치기) */
+.notice{padding:0;overflow:hidden;border-color:rgba(201,55,42,.45)}
+.notice summary{list-style:none;display:flex;align-items:center;gap:14px;padding:0 16px 0 0;cursor:pointer;min-height:56px}
+.notice summary::-webkit-details-marker{display:none}
+.notice .flag{flex:0 0 auto;align-self:stretch;width:72px;display:grid;place-items:center;
+  background:linear-gradient(180deg,var(--red-2),var(--red));font-family:'Song Myung',serif;font-size:15px;letter-spacing:.15em;color:#fff}
+.notice summary b{flex:1;min-width:0;font-size:16.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:16px 0}
+.notice .chev{flex:0 0 auto;width:10px;height:10px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  transform:rotate(45deg) translateY(-3px);transition:transform .25s}
+.notice[open] .chev{transform:rotate(-135deg) translateY(-3px)}
+.notice[open] summary b{white-space:normal}
+.notice .body{padding:14px 18px 16px 86px;border-top:1px solid rgba(201,55,42,.25);animation:open .25s ease}
+.notice .body p{font-size:14.5px;color:#d8ccb4;line-height:1.65;white-space:pre-wrap}
+.notice .body small{display:block;margin-top:8px;font-size:12px;color:var(--muted)}
+@keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* 이번 주 일정 (가로 7칸) */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;padding:14px}
+.day{text-align:center;padding:12px 6px 14px;border-radius:8px;min-height:96px;transition:background .2s}
+.day .dn{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:8px}
+.day .dn b{font-family:'Song Myung',serif;font-size:19px;font-weight:400;color:#e9dcc0}
+.day .dn span{font-size:11.5px;color:var(--muted)}
+.day.sat .dn b{color:#8fa8d8}.day.sun .dn b{color:#e07a6e}
+.day ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.day li{font-size:12.5px;line-height:1.35;color:#d8ccb4}
+.day li.war{color:#f08a7c;font-weight:500}
+.day li.live{color:#9fb6e6}
+.day.today{background:linear-gradient(180deg,rgba(216,178,106,.2),rgba(216,178,106,.06));box-shadow:inset 0 0 0 1.5px var(--gold)}
+.day.today .dn b{color:var(--gold)}
+.day.today .dn span::after{content:" · 오늘";color:var(--gold);font-weight:700}
+
+/* 오늘의 이벤트 */
+.events{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ev{padding:16px;display:flex;flex-direction:column;gap:8px}
+.ev .top{display:flex;align-items:center;gap:8px}
+.ev .tag{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:3px;background:rgba(216,178,106,.15);color:var(--gold)}
+.ev .tag.hot{background:var(--red);color:#fff}
+.ev .left{margin-left:auto;font-size:12px;color:var(--muted)}
+.ev b{font-size:16px}
+.ev p{font-size:13.5px;color:#cfc2a8;line-height:1.5}
+.ev .bar2{height:4px;border-radius:2px;background:rgba(239,228,207,.08);overflow:hidden;margin-top:auto}
+.ev .bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-2),var(--gold))}
+.ev.hot .left{color:#f08a7c}
+.ev .left{font-variant-numeric:tabular-nums}
+.ev.hot .bar2 i{background:linear-gradient(90deg,var(--red),var(--red-2))}
+
+.ev.extra{display:none}
+.events.all .ev.extra{display:flex;animation:open .25s ease}
+.more-btn{display:block;width:100%;margin-top:12px;padding:12px;border-radius:6px;border:1px dashed rgba(216,178,106,.45);
+  background:rgba(216,178,106,.06);color:var(--gold);font-family:'Song Myung',serif;font-size:16px;letter-spacing:.1em;cursor:pointer}
+.more-btn:hover{background:rgba(216,178,106,.12)}
+[hidden]{display:none!important}
+.empty{padding:18px;text-align:center;color:var(--muted);font-size:14px}
+.notices{display:flex;flex-direction:column;gap:8px}
+.soon{padding:60px 20px;text-align:center}
+.soon img{width:64px;opacity:.9}
+.soon h2{font-family:'Song Myung',serif;font-weight:400;font-size:22px;color:var(--gold);margin:14px 0 6px}
+.soon p{color:var(--muted);font-size:14px}
+footer{padding:10px 0 40px;text-align:center;font-size:12px;color:var(--muted)}
+footer button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:12px;margin-left:8px}
+.status{font-size:12px;color:var(--muted);text-align:right;margin-top:6px;min-height:16px}
+/* 입장 문 열림 */
+.gate{position:fixed;inset:0;z-index:50;pointer-events:none;display:flex}
+.gate i{flex:1;background:linear-gradient(90deg,#0d0b09,#1c1712);transform:scaleX(1)}
+.gate i:first-child{transform-origin:left;border-right:1px solid rgba(216,178,106,.5)}
+.gate i:last-child{transform-origin:right;border-left:1px solid rgba(216,178,106,.5)}
+.gate.open i{animation:gateOpen .7s cubic-bezier(.7,0,.3,1) .05s forwards}
+@keyframes gateOpen{to{transform:scaleX(0)}}
+
+/* ============ 모바일 ============ */
+@media (max-width:980px){
+  .wrap{padding:0 14px}
+  .bar{height:auto;min-height:60px;gap:10px;flex-wrap:wrap;padding-top:10px}
+  .brand img{width:36px;height:36px;border-radius:9px}
+  .brand .name{font-size:23px}
+  nav.menu{order:3;flex:1 1 100%;margin:0 -14px;justify-content:space-around;overflow-x:auto;scrollbar-width:none;
+    padding:0 6px;border-top:1px solid var(--line)}
+  nav.menu::-webkit-scrollbar{display:none}
+  nav.menu a{flex:0 1 auto;white-space:nowrap;font-size:clamp(12.5px,3.7vw,16px);letter-spacing:0;padding:11px clamp(4px,1.6vw,14px)}
+  nav.menu a.on::after{left:6px;right:6px;bottom:0}
+  .social{margin-left:auto;gap:6px}
+  .social a{width:32px;height:32px}
+  .social svg{width:16px;height:16px}
+  main{padding-top:18px}
+  .hello{flex-direction:column;gap:4px}
+  .hello h1{font-size:18px}
+  .week{gap:2px;padding:8px 6px}
+  .day{padding:9px 1px 10px;min-height:84px;border-radius:6px}
+  .day .dn{margin-bottom:6px}
+  .day .dn b{font-size:16px}
+  .day .dn span{font-size:10px}
+  .day.today .dn span::after{content:""}
+  .day li{font-size:10.5px;line-height:1.3;letter-spacing:-.02em}
+  .events{grid-template-columns:1fr}
+  .notice .flag{width:56px;font-size:13px}
+  .notice summary b{font-size:15px}
+  .notice .body{padding:12px 14px 14px}
+  /* 폰: 목록형 (누르면 설명 펼침) */
+  .events{grid-template-columns:1fr;gap:0;background:linear-gradient(180deg,var(--card),var(--ink-2));border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .ev{flex-direction:row;align-items:center;gap:10px;padding:11px 12px;border:0;border-radius:0;background:none;border-bottom:1px solid var(--line);position:relative}
+  .ev:last-child{border-bottom:0}
+  .ev .top{display:contents}
+  .ev .tag{order:1;flex:0 0 58px;text-align:center;font-size:11px;padding:3px 0}
+  .ev b{order:2;flex:1;min-width:0;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ev{flex-wrap:wrap;cursor:pointer}
+  .ev p{display:none;order:4;flex:1 1 100%;margin:2px 0 2px 68px;font-size:13px;color:#cfc2a8}
+  .ev.open p{display:block;animation:open .2s ease}
+  .ev .left{font-variant-numeric:tabular-nums}
+  .ev .left{order:3;margin:0;font-size:11px;white-space:nowrap;color:#c9b99a}
+  .ev .bar2{position:absolute;left:0;right:0;bottom:0;height:2px;margin:0;border-radius:0;background:none}
+  .ev .bar2 i{opacity:.7}
+
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#home">
+      <img src="icon/icon-192.png" alt="">
+      <span class="name">조선양록회<small>&amp; 슬로우라이프</small></span>
+    </a>
+    <nav class="menu">
+      <a href="#home" data-tab="home" class="on">홈</a>
+      <a href="#board" data-tab="board">자유게시판</a>
+      <a href="#guide" data-tab="guide">초보자 가이드</a>
+      <a href="#strategy" data-tab="strategy">공략집</a>
+      <a href="#roadmap" data-tab="roadmap">로드맵</a>
+    </nav>
+    <div class="social">
+      <a href="https://www.youtube.com/@ProjectIM_red" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" fill="#e0453a"/><path d="M10 9l5 3-5 3z" fill="#fff"/></svg></a>
+      <a href="https://game.naver.com/lounge/Imjin_War/home" target="_blank" rel="noopener" aria-label="게임 라운지" title="게임 라운지"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="#2bc46b"/><path d="M8 16V8h2.2l3.6 5V8H16v8h-2.2l-3.6-5v5z" fill="#fff"/></svg></a>
+      <a href="https://open.kakao.com/o/gY59i7yi" target="_blank" rel="noopener" aria-label="카카오톡" title="카카오톡"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="9" ry="7.2" fill="#fee500"/><path d="M8 17l-1 3.5 4-2.6z" fill="#fee500"/><text x="12" y="13.6" text-anchor="middle" font-size="6.4" font-weight="700" fill="#3a1d1d" font-family="sans-serif">TALK</text></svg></a>
+    </div>
+  </div>
+</header>
+
+<div class="gate" id="gate"><i></i><i></i></div>
+
+<main class="wrap">
+  <section id="tab-home">
+    <h2 class="sec-title first">📢 오늘 공지</h2>
+    <div class="notices" id="notices"><div class="card empty">불러오는 중…</div></div>
+
+    <h2 class="sec-title">📅 이번 주 일정</h2>
+    <div class="card week" id="week"></div>
+
+    <h2 class="sec-title">🎉 오늘의 이벤트</h2>
+    <div class="events" id="events"></div>
+    <button type="button" class="more-btn" id="moreBtn" hidden>+ 더보기</button>
+    <p class="status" id="status"></p>
+  </section>
+
+  <section id="tab-soon" class="soon" hidden>
+    <img src="icon/emblem.png" alt="">
+    <h2 id="soonTitle"></h2>
+    <p>준비 중이에요. 곧 열릴 예정입니다.</p>
+  </section>
+</main>
+<footer><span id="who"></span><button type="button" id="logout">로그아웃</button></footer>
+
+<script>
+/* =========================================================
+   설정 (로그인 화면 index.html 과 같은 주소)
+   ========================================================= */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby50UXAep9TnS_pUEouvTqDp2AD2XUoiE9DfoyGrw0TNyGfc4P5sinCxW9OlqN0PTp_kQ/exec';
+const SHOW_EVENTS = 6;        // 오늘의 이벤트 기본 표시 개수
+const MAX_NOTICES = 3;        // 공지 최대 표시 개수
+const REFRESH_MIN = 5;        // 열어둔 동안 자동 새로고침 간격(분)
+
+const AUTH = 'imjoban_auth', CACHE = 'imjoban_cache';
+const $ = id => document.getElementById(id);
+const DAYS = ['일','월','화','수','목','금','토'];
+function get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }
+function put(k,v){ try{ v==null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+const auth = get(AUTH);
+if (!auth || !auth.nick) location.replace('./');
+
+/* 입장 문 열림 연출 (로그인 화면에서 넘어온 경우) */
+(function(){ const g=$('gate');
+  try{ if (sessionStorage.getItem('imjoban_gate')){ sessionStorage.removeItem('imjoban_gate'); g.classList.add('open'); setTimeout(()=>g.remove(),900); return; } }catch(e){}
+  g.remove(); })();
+
+$('who').textContent = (auth && auth.nick ? auth.nick + '님' : '');
+$('logout').onclick = () => { put(AUTH,null); put(CACHE,null); location.replace('./'); };
+
+/* ---------- 날짜 도구 (게임 하루: 오전 9시 ~ 다음날 오전 8시 59분) ---------- */
+function gameToday(){ const d=new Date(); if(d.getHours()<9) d.setDate(d.getDate()-1); d.setHours(0,0,0,0); return d; }
+function parseWhen(v, defHour){
+  v = String(v||'').trim(); if(!v) return null;
+  let m = v.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})(?:[ T](\d{1,2}):(\d{2}))?/);
+  let y, mo, d, h=null, mi=0;
+  if (m){ y=+m[1]; mo=+m[2]; d=+m[3]; if(m[4]!=null){ h=+m[4]; mi=+m[5]; } }
+  else if ((m = v.match(/^(\d{1,2})[-./](\d{1,2})(?:\s+(\d{1,2}):(\d{2}))?$/))){
+    y=gameToday().getFullYear(); mo=+m[1]; d=+m[2]; if(m[3]!=null){ h=+m[3]; mi=+m[4]; } }
+  else return null;
+  return new Date(y, mo-1, d, h==null?defHour:h, mi).getTime();
+}
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- 공지 ---------- */
+function renderNotices(list){
+  const box=$('notices');
+  list=(list||[]).filter(n=>String(n['제목']||'').trim()).slice(0,MAX_NOTICES);
+  if(!list.length){ box.innerHTML='<div class="card empty">등록된 공지가 없어요</div>'; return; }
+  box.innerHTML=list.map(n=>`<details class="card notice">
+    <summary><span class="flag">공지</span><b>${esc(n['제목'])}</b><i class="chev" aria-hidden="true"></i></summary>
+    <div class="body">${n['내용']?`<p>${esc(n['내용'])}</p>`:''}${n['작성일']?`<small>${esc(n['작성일'])}</small>`:''}</div>
+  </details>`).join('');
+}
+
+/* ---------- 이번 주 일정 ---------- */
+function renderWeek(rows){
+  const t=gameToday(), mon=new Date(t); mon.setDate(t.getDate()-((t.getDay()+6)%7));
+  const by={}; (rows||[]).forEach(r=>{ const k=String(r['요일']||'').trim().charAt(0); if(!k||!r['내용']) return; (by[k]=by[k]||[]).push(r); });
+  let html='';
+  for(let i=0;i<7;i++){
+    const d=new Date(mon); d.setDate(mon.getDate()+i); const dn=DAYS[d.getDay()];
+    const cls=['day', d.getDay()===6?'sat':'', d.getDay()===0?'sun':'', +d===+t?'today':''].join(' ');
+    html+=`<div class="${cls}"><div class="dn"><b>${dn}</b><span>${d.getMonth()+1}/${d.getDate()}</span></div><ul>`+
+      (by[dn]||[]).map(r=>{ const g=String(r['구분']||''); const c=/상단전|전쟁|길드전/.test(g)?'war':/라방|방송/.test(g)?'live':''; return `<li class="${c}">${esc(r['내용'])}</li>`; }).join('')+'</ul></div>';
+  }
+  $('week').innerHTML=html;
+}
+
+/* ---------- 오늘의 이벤트 ---------- */
+let EVENTS=[];
+function left(ms){
+  if(ms<=0) return '종료';
+  const s=Math.floor(ms/1000), d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60);
+  if(!d && !h && !m) return '1분 미만';
+  return (d?d+'일 ':'')+(d||h?h+'시간 ':'')+m+'분';
+}
+function dtag(end){ const n=Math.ceil((end-Date.now())/864e5)-1; return n<=0?'오늘 마감':'D-'+n; }
+const evBox=$('events'), mb=$('moreBtn');
+function renderEvents(rows){
+  const now=Date.now();
+  EVENTS=(rows||[]).map(r=>({title:r['제목'],desc:r['내용'],start:parseWhen(r['시작'],9),end:parseWhen(r['종료'],8)}))
+    .filter(e=>e.title && e.end && e.end>now && (!e.start || e.start<=now)).sort((a,b)=>a.end-b.end);
+  if(!EVENTS.length){ evBox.innerHTML='<div class="card empty" style="grid-column:1/-1">진행 중인 이벤트가 없어요</div>'; mb.hidden=true; return; }
+  evBox.innerHTML=EVENTS.map((e,i)=>{ const hot=dtag(e.end)==='오늘 마감';
+    return `<div class="card ev${hot?' hot':''}${i>=SHOW_EVENTS?' extra':''}" data-start="${e.start||''}" data-end="${e.end}">
+      <div class="top"><span class="tag${hot?' hot':''}">${dtag(e.end)}</span><span class="left"></span></div>
+      <b>${esc(e.title)}</b>${e.desc?`<p>${esc(e.desc)}</p>`:'<p></p>'}<div class="bar2"><i></i></div></div>`; }).join('');
+  mb.hidden=EVENTS.length<=SHOW_EVENTS; mb.textContent=evBox.classList.contains('all')?'– 접기':'+ 더보기';
+  tick();
+}
+function tick(){
+  const now=Date.now();
+  evBox.querySelectorAll('.ev').forEach(el=>{
+    const st=+el.dataset.start||0, en=+el.dataset.end;
+    el.querySelector('.left').textContent=left(en-now);
+    el.querySelector('.bar2 i').style.width=(st?Math.min(100,Math.max(0,(now-st)/(en-st)*100)):0)+'%';
+  });
+}
+setInterval(tick,15000);
+evBox.addEventListener('click',e=>{const el=e.target.closest('.ev'); if(el && matchMedia('(max-width:980px)').matches) el.classList.toggle('open');});
+mb.onclick=()=>{const o=evBox.classList.toggle('all');mb.textContent=o?'– 접기':'+ 더보기';};
+
+/* ---------- 데이터 불러오기 (저장된 내용 먼저, 최신은 뒤에서) ---------- */
+function renderAll(d){ renderNotices(d.notices); renderWeek(d.weekly); renderEvents(d.events); }
+async function load(silent){
+  for(let i=0;i<3;i++){
+    try{
+      const res=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({nick:auth.nick,pw:auth.pw})});
+      const r=await res.json();
+      if(!r.ok){ if(r.code==='bad_pw'||r.code==='blocked'){ put(AUTH,null); put(CACHE,null); location.replace('./'); } return; }
+      put(CACHE,{at:Date.now(),data:r.data}); renderAll(r.data); $('status').textContent=''; return;
+    }catch(e){ await new Promise(ok=>setTimeout(ok,700*(i+1))); }
+  }
+  if(!silent) $('status').textContent='연결이 원활하지 않아 마지막으로 불러온 내용을 보여주고 있어요.';
+}
+const cached=get(CACHE);
+if(cached && cached.data) renderAll(cached.data); else renderWeek([]);
+if(auth) load();
+setInterval(()=>{ if(!document.hidden) load(true); }, REFRESH_MIN*60000);
+
+/* ---------- 탭 ---------- */
+const TAB_NAMES={board:'자유게시판',guide:'초보자 가이드',strategy:'공략집',roadmap:'로드맵'};
+function showTab(){
+  const t=(location.hash||'#home').slice(1);
+  document.querySelectorAll('nav.menu a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t||(!TAB_NAMES[t]&&a.dataset.tab==='home')));
+  const home=!TAB_NAMES[t]; $('tab-home').hidden=!home; $('tab-soon').hidden=home;
+  if(!home) $('soonTitle').textContent=TAB_NAMES[t];
+  scrollTo(0,0);
+}
+addEventListener('hashchange',showTab); showTab();
+</script>
+</body>
+</html>

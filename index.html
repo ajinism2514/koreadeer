@@ -159,13 +159,6 @@ button,input{font:inherit;color:inherit}
 .welcome img{width:64px;filter:drop-shadow(0 0 16px rgba(216,178,106,.6))}
 .welcome p{font-family:'Song Myung',serif;font-size:20px;letter-spacing:.1em;color:var(--gold)}
 
-/* 메인 자리 (다음 단계에서 제작) */
-#main{position:fixed;inset:0;z-index:5;background:var(--ink);display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:14px;text-align:center;padding:24px}
-#main img{width:72px}
-#main h1{font-family:'Song Myung',serif;font-weight:400;font-size:22px;color:var(--gold)}
-#main p{color:var(--muted);font-size:14px;line-height:1.6}
-#main button{margin-top:6px;background:none;border:1px solid rgba(216,178,106,.5);color:var(--paper);padding:10px 18px;border-radius:4px;cursor:pointer}
 
 @media (min-width:900px){
   .gamelogo{width:300px}
@@ -241,13 +234,7 @@ button,input{font:inherit;color:inherit}
 <div class="gate" id="gate"><i></i><i></i></div>
 <div class="welcome" id="welcome"><img src="icon/emblem.png" alt=""><p id="welcomeText"></p></div>
 
-<!-- 메인 화면은 다음 단계에서 제작 -->
-<section id="main" hidden>
-  <img src="icon/emblem.png" alt="">
-  <h1 id="mainHello"></h1>
-  <p>로그인 화면 시안입니다.<br>메인 화면은 다음 단계에서 만들어요.</p>
-  <button type="button" id="logout">로그아웃하고 인트로 다시 보기</button>
-</section>
+
 
 <script>
 /* =========================================================
@@ -355,19 +342,15 @@ async function request(nick, pw){
 
 /* ---------- 입장 연출 ---------- */
 function enterSite(nick, data){
-  try{ sessionStorage.setItem('imjoban_data', JSON.stringify(data||{})); }catch(e){}
+  try{ if (data) localStorage.setItem('imjoban_cache', JSON.stringify({at:Date.now(), data})); }catch(e){}
+  try{ sessionStorage.setItem('imjoban_gate','1'); }catch(e){}
   const gate = $('gate');
   gate.className = 'gate close';
   setTimeout(() => {
     $('welcomeText').textContent = nick + '님, 어서 오세요';
     $('welcome').classList.add('on');
   }, 450);
-  setTimeout(() => {
-    $('hero').hidden = true; $('stage').hidden = true; $('skipTip').hidden = true;
-    $('main').hidden = false; $('mainHello').textContent = nick + '님 환영합니다';
-    $('welcome').classList.remove('on');
-    gate.className = 'gate open';
-  }, 1500);
+  setTimeout(() => location.href = 'app.html', 1300);
 }
 
 /* ---------- 로그인 ---------- */
@@ -400,7 +383,6 @@ $('panel').addEventListener('submit', async e => {
   }
 });
 
-$('logout').onclick = () => { save(null); location.reload(); };
 
 /* ---------- 이미 로그인한 사람: 짧은 인트로 후 자동 입장 ---------- */
 (async function(){
