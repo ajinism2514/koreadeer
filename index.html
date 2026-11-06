@@ -350,7 +350,7 @@ function enterSite(nick, data){
     $('welcomeText').textContent = nick + '님, 어서 오세요';
     $('welcome').classList.add('on');
   }, 450);
-  setTimeout(() => location.href = 'app.html', 1300);
+  setTimeout(() => location.href = 'app.html?v=' + Date.now(), 1300);
 }
 
 /* ---------- 로그인 ---------- */
