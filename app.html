@@ -425,7 +425,7 @@ function renderRoadmap(rows){
   const cats=['전체',...new Set(RM.map(r=>r['분류']).filter(Boolean))];
   $('rmChips').innerHTML=cats.map(c=>`<button data-c="${esc(c)}" class="${c===RM_CAT?'on':''}">${esc(c)}</button>`).join('');
   const show=RM.filter(r=>RM_CAT==='전체'||r['분류']===RM_CAT);
-  const todo=show.filter(r=>!/적용|완료/.test(r['상태']||'')), done=show.filter(r=>/적용|완료/.test(r['상태']||''));
+  const todo=show.filter(r=>!/적용|완료/.test(r['상태']||'')), done=[];   // 적용된 항목은 표시하지 않음
   const groups=[]; const idx={};
   todo.forEach(r=>{const k=String(r['시기']||'미정').trim()||'미정'; if(!(k in idx)){idx[k]=groups.length;groups.push({k,list:[]});} groups[idx[k]].list.push(r);});
   const card=(r,d)=>`<div class="card item${d?' done':''}"><div class="meta">${r['분류']?`<span class="cat c-${esc(r['분류'])}">${esc(r['분류'])}</span>`:''}${r['발표']?`<span class="src">${esc(r['발표'])}</span>`:''}</div><b class="ttl">${esc(r['제목'])}</b>${details(r['내용'])}${images(r['이미지'])}</div>`;
