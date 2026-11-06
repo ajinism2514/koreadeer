@@ -126,6 +126,72 @@ footer button{background:none;border:0;color:var(--muted);text-decoration:underl
 .gate.open i{animation:gateOpen .7s cubic-bezier(.7,0,.3,1) .05s forwards}
 @keyframes gateOpen{to{transform:scaleX(0)}}
 
+
+/* ============ 로드맵 ============ */
+.rm-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 0 14px;flex-wrap:wrap}
+.rm-head h2{font-family:'Song Myung',serif;font-weight:400;font-size:24px;color:#f3e8d2}
+.rm-head p{font-size:13px;color:var(--muted);margin-top:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{border:1px solid rgba(216,178,106,.3);background:rgba(239,228,207,.04);color:#cdbf9f;padding:6px 13px;border-radius:99px;font-size:13px;cursor:pointer;font-family:inherit}
+.chips button.on{background:var(--gold);border-color:var(--gold);color:#2a1a08;font-weight:700}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--gold),rgba(216,178,106,.15))}
+.period{position:relative;margin:0 0 22px}
+.period>h3{position:relative;font-family:'Song Myung',serif;font-weight:400;font-size:19px;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.period>h3::before{content:"";position:absolute;left:-27px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;
+  background:var(--ink);border:2px solid var(--gold);box-shadow:0 0 0 4px rgba(216,178,106,.12)}
+.period.now>h3::before{background:var(--gold);box-shadow:0 0 0 5px rgba(216,178,106,.25),0 0 14px rgba(216,178,106,.6)}
+.period>h3 small{font-family:'Noto Sans KR';font-size:12px;color:var(--muted)}
+.period.now>h3 small{color:var(--muted)}
+.items{display:grid;grid-template-columns:1fr;gap:8px}
+.item{cursor:pointer;gap:4px;padding:14px 18px}
+.item .meta{order:0}
+.item .ttl{display:flex;align-items:center;gap:8px}
+.item .ttl::after{content:"";margin-left:auto;flex:0 0 auto;width:8px;height:8px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+.item.open .ttl::after{transform:rotate(-135deg) translateY(-2px)}
+.item .dl,.item .imgs{display:none}
+.item.open .dl,.item.open .imgs{display:flex;animation:open .2s ease}
+.item.open .imgs{display:grid}
+.items{gap:8px}
+
+.item{padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.item .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cat{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(216,178,106,.15);color:var(--gold)}
+.cat.c-장수{background:rgba(201,55,42,.2);color:#f08a7c}
+.cat.c-모드{background:rgba(111,143,208,.2);color:#9fb6e6}
+.cat.c-이벤트{background:rgba(120,180,110,.18);color:#a6d39a}
+.cat.c-시스템{background:rgba(239,228,207,.1);color:#d8ccb4}
+.src{font-size:12px;color:var(--muted);margin-left:auto}
+.item b{font-size:16px}
+.item p{font-size:13.5px;color:#cfc2a8;line-height:1.55;white-space:pre-wrap}
+.item.done{opacity:.55}
+.item.done b{text-decoration:line-through;text-decoration-color:rgba(216,178,106,.6)}
+.item .ttl{font-family:'Song Myung',serif;font-size:20px;line-height:1.3;color:#f6ecd8}
+.dl{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.dl div{border-left:3px solid var(--red-2);padding-left:11px}
+.dl dt{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.03em}
+.dl dd{font-size:14px;color:#e2d6bd;line-height:1.5;margin-top:1px}
+.dl dd em{font-style:normal;color:#f08a7c;font-weight:700}
+.imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:6px}
+.imgs img{width:100%;border-radius:6px;border:1px solid var(--line);display:block;cursor:zoom-in}
+.zoom{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+.zoom img{max-width:100%;max-height:100%;border-radius:6px}
+.cat.c-상단대전{background:rgba(201,55,42,.2);color:#f08a7c}
+.cat.c-장비{background:rgba(216,178,106,.18);color:var(--gold)}
+.cat.c-콘텐츠{background:rgba(111,143,208,.2);color:#9fb6e6}
+.cat.c-장수{background:rgba(214,120,170,.18);color:#e7a3c8}
+.donebar{margin-top:6px}
+.donebar summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);padding:8px 12px;border:1px dashed rgba(216,178,106,.35);border-radius:6px}
+.donebar summary::-webkit-details-marker{display:none}
+.donebar .items{margin-top:10px}
+@media (max-width:980px){
+  .timeline{padding-left:24px}
+  .timeline::before{left:6px}
+  .period>h3{font-size:17px}
+  .period>h3::before{left:-24px;width:12px;height:12px;margin-top:-6px}
+  .rm-head h2{font-size:21px}
+}
+
 /* ============ 모바일 ============ */
 @media (max-width:980px){
   .wrap{padding:0 14px}
@@ -208,6 +274,15 @@ footer button{background:none;border:0;color:var(--muted);text-decoration:underl
     <div class="events" id="events" hidden></div>
     <button type="button" class="more-btn" id="moreBtn" hidden></button>
     <p class="status" id="status"></p>
+  </section>
+
+  <section id="tab-roadmap" hidden>
+    <div class="rm-head">
+      <div><h2>🗺️ 업데이트 로드맵</h2></div>
+      <div class="chips" id="rmChips" hidden></div>
+    </div>
+    <div class="timeline" id="rmList"></div>
+    <details class="donebar" id="rmDone" hidden><summary></summary><div class="items" id="rmDoneList"></div></details>
   </section>
 
   <section id="tab-soon" class="soon" hidden>
@@ -317,8 +392,55 @@ setInterval(tick,15000);
 evBox.addEventListener('click',e=>{const el=e.target.closest('.ev'); if(el && matchMedia('(max-width:980px)').matches) el.classList.toggle('open');});
 mb.onclick=()=>{const o=evBox.classList.toggle('all');mb.textContent=o?'– 접기':'+ 더보기';};
 
+
+/* ---------- 로드맵 ---------- */
+/* 내용: 한 줄에 "라벨: 값" → 카드뉴스처럼 표시 / 숫자 변화(→)는 강조 */
+function details(t){
+  const lines=String(t||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length) return '';
+  return '<dl class="dl">'+lines.map(l=>{
+    const m=l.match(/^([^:：]{1,20})[:：]\s*(.*)$/);
+    const hi=v=>esc(v).replace(/(\d[\d.,%~]*\s*(?:초|%|명|레벨|성)?\s*→\s*\d[\d.,%]*\s*(?:초|%|명|레벨|성)?)/g,'<em>$1</em>');
+    return m?`<div><dt>${esc(m[1])}</dt><dd>${hi(m[2]).split(' · ').join('<br>')}</dd></div>`:`<div><dd>${hi(l)}</dd></div>`;
+  }).join('')+'</dl>';
+}
+/* 이미지: 주소를 줄바꿈이나 쉼표로 여러 개. 구글 드라이브 공유 링크도 가능 */
+function imgUrl(u){
+  u=u.trim(); const m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*id=)([\w-]{20,})/);
+  return m?`https://drive.google.com/thumbnail?id=${m[1]}&sz=w1200`:u;
+}
+function images(t){
+  const urls=String(t||'').split(/[\n,]+/).map(x=>x.trim()).filter(x=>/^https?:\/\//.test(x));
+  return urls.length?'<div class="imgs">'+urls.map(u=>`<img src="${esc(imgUrl(u))}" alt="" loading="lazy">`).join('')+'</div>':'';
+}
+document.addEventListener('click',e=>{
+  const im=e.target.closest('.imgs img'); if(!im) return;
+  const z=document.createElement('div'); z.className='zoom'; const i=document.createElement('img'); i.src=im.src; z.appendChild(i);
+  z.onclick=()=>z.remove(); document.body.appendChild(z);
+});
+
+let RM=[], RM_CAT='전체';
+function renderRoadmap(rows){
+  RM=(rows||[]).filter(r=>String(r['제목']||'').trim());
+  const cats=['전체',...new Set(RM.map(r=>r['분류']).filter(Boolean))];
+  $('rmChips').innerHTML=cats.map(c=>`<button data-c="${esc(c)}" class="${c===RM_CAT?'on':''}">${esc(c)}</button>`).join('');
+  const show=RM.filter(r=>RM_CAT==='전체'||r['분류']===RM_CAT);
+  const todo=show.filter(r=>!/적용|완료/.test(r['상태']||'')), done=show.filter(r=>/적용|완료/.test(r['상태']||''));
+  const groups=[]; const idx={};
+  todo.forEach(r=>{const k=String(r['시기']||'미정').trim()||'미정'; if(!(k in idx)){idx[k]=groups.length;groups.push({k,list:[]});} groups[idx[k]].list.push(r);});
+  const card=(r,d)=>`<div class="card item${d?' done':''}"><div class="meta">${r['분류']?`<span class="cat c-${esc(r['분류'])}">${esc(r['분류'])}</span>`:''}${r['발표']?`<span class="src">${esc(r['발표'])}</span>`:''}</div><b class="ttl">${esc(r['제목'])}</b>${details(r['내용'])}${images(r['이미지'])}</div>`;
+  $('rmList').innerHTML=groups.length?groups.map((g,i)=>`<div class="period${i===0?' now':''}"><h3>${esc(g.k)} <small>${g.list.length}개</small></h3><div class="items">${g.list.map(r=>card(r)).join('')}</div></div>`).join('')
+    :'<div class="card empty">예정된 업데이트가 없어요</div>';
+  $('rmDone').hidden=!done.length;
+  $('rmDone').querySelector('summary').textContent=`✔ 적용 완료된 항목 보기 (${done.length})`;
+  $('rmDoneList').innerHTML=done.map(r=>card(r,true)).join('');
+}
+$('rmChips').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; RM_CAT=b.dataset.c; renderRoadmap(RM_ALL);});
+let RM_ALL=[];
+document.addEventListener('click',e=>{ if(e.target.closest('.imgs img')) return; const it=e.target.closest('.item'); if(it) it.classList.toggle('open'); });
+
 /* ---------- 데이터 불러오기 (저장된 내용 먼저, 최신은 뒤에서) ---------- */
-function renderAll(d){ renderNotices(d.notices); renderWeek(d.weekly); }
+function renderAll(d){ renderNotices(d.notices); renderWeek(d.weekly); RM_ALL=d.roadmap||[]; renderRoadmap(RM_ALL); }
 async function load(silent){
   for(let i=0;i<3;i++){
     try{
@@ -337,11 +459,14 @@ setInterval(()=>{ if(!document.hidden) load(true); }, REFRESH_MIN*60000);
 
 /* ---------- 탭 ---------- */
 const TAB_NAMES={board:'자유게시판',guide:'초보자 가이드',strategy:'공략집',roadmap:'로드맵'};
+const READY={roadmap:'tab-roadmap'};
 function showTab(){
   const t=(location.hash||'#home').slice(1);
   document.querySelectorAll('nav.menu a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t||(!TAB_NAMES[t]&&a.dataset.tab==='home')));
-  const home=!TAB_NAMES[t]; $('tab-home').hidden=!home; $('tab-soon').hidden=home;
-  if(!home) $('soonTitle').textContent=TAB_NAMES[t];
+  const home=!TAB_NAMES[t]; $('tab-home').hidden=!home;
+  Object.values(READY).forEach(id=>$(id).hidden=true);
+  if(READY[t]){ $(READY[t]).hidden=false; $('tab-soon').hidden=true; }
+  else { $('tab-soon').hidden=home; if(!home) $('soonTitle').textContent=TAB_NAMES[t]; }
   scrollTo(0,0);
 }
 addEventListener('hashchange',showTab); showTab();
