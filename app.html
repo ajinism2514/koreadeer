@@ -410,7 +410,7 @@ function imgUrl(u){
   return m?`https://drive.google.com/thumbnail?id=${m[1]}&sz=w1200`:u;
 }
 function images(t){
-  const urls=String(t||'').split(/[\n,]+/).map(x=>x.trim()).filter(x=>/^https?:\/\//.test(x));
+  const urls=String(t||'').split(/[\n,]+/).map(x=>x.trim()).filter(x=>/^https?:\/\//.test(x)||/^[\w./-]+\.(jpe?g|png|webp|gif)$/i.test(x));
   return urls.length?'<div class="imgs">'+urls.map(u=>`<img src="${esc(imgUrl(u))}" alt="" loading="lazy">`).join('')+'</div>':'';
 }
 document.addEventListener('click',e=>{
