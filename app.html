@@ -204,9 +204,9 @@ footer button{background:none;border:0;color:var(--muted);text-decoration:underl
     <h2 class="sec-title">📅 이번 주 일정</h2>
     <div class="card week" id="week"></div>
 
-    <h2 class="sec-title">🎉 오늘의 이벤트</h2>
-    <div class="events" id="events"></div>
-    <button type="button" class="more-btn" id="moreBtn" hidden>+ 더보기</button>
+    <!-- 오늘의 이벤트: 사용하지 않음 (다시 쓰려면 이 자리에 복원) -->
+    <div class="events" id="events" hidden></div>
+    <button type="button" class="more-btn" id="moreBtn" hidden></button>
     <p class="status" id="status"></p>
   </section>
 
@@ -318,7 +318,7 @@ evBox.addEventListener('click',e=>{const el=e.target.closest('.ev'); if(el && ma
 mb.onclick=()=>{const o=evBox.classList.toggle('all');mb.textContent=o?'– 접기':'+ 더보기';};
 
 /* ---------- 데이터 불러오기 (저장된 내용 먼저, 최신은 뒤에서) ---------- */
-function renderAll(d){ renderNotices(d.notices); renderWeek(d.weekly); renderEvents(d.events); }
+function renderAll(d){ renderNotices(d.notices); renderWeek(d.weekly); }
 async function load(silent){
   for(let i=0;i<3;i++){
     try{
