@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>임조반 길드</title>
+<meta name="description" content="임진왜란 조선의 반격 길드 공략 · 일정 · 라방 로드맵">
+<meta property="og:title" content="임조반 길드">
+<meta property="og:description" content="공략 · 일정 · 라방 로드맵">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* ============ 설정은 아래 <script>의 CONFIG에서 ============ */
+:root{
+  --bg:#f6f1e7; --paper:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e6dccb;
+  --red:#a8322d; --red-soft:#f6e3df; --gold:#b58a3c; --gold-soft:#f5ecd9; --navy:#26324a;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 4px 14px rgba(60,40,20,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#17150f;--paper:#221f18;--ink:#f1e9da;--muted:#a99d8a;--line:#383226;
+    --red:#e0675f;--red-soft:#3a201c;--gold:#d8b26a;--gold-soft:#332a19;--navy:#9fb2d6;
+    --shadow:0 1px 2px rgba(0,0,0,.3)}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{background:var(--bg)}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);line-height:1.55;
+  min-height:100vh;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* ---- 로그인 ---- */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.login-card{width:100%;max-width:360px;background:var(--paper);border:1px solid var(--line);
+  border-radius:18px;padding:32px 24px;box-shadow:var(--shadow);text-align:center}
+.seal{width:64px;height:64px;margin:0 auto 14px;border-radius:14px;background:var(--red);
+  color:#fff;display:grid;place-items:center;font-family:'Noto Serif KR',serif;font-weight:900;
+  font-size:26px;transform:rotate(-4deg)}
+.login-card h1{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:900}
+.login-card p.sub{color:var(--muted);font-size:14px;margin:4px 0 22px}
+.field{text-align:left;margin-bottom:12px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:4px}
+.field input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;
+  background:var(--bg);font-size:16px;outline:none}
+.field input:focus{border-color:var(--gold)}
+.btn{width:100%;padding:13px;border:0;border-radius:10px;background:var(--red);color:#fff;
+  font-weight:700;font-size:16px;cursor:pointer;margin-top:6px}
+.btn:disabled{opacity:.6}
+.err{color:var(--red);font-size:13px;min-height:20px;margin-top:10px}
+.demo-tag{display:inline-block;margin-top:14px;font-size:12px;color:var(--muted);
+  background:var(--gold-soft);padding:4px 10px;border-radius:99px}
+
+/* ---- 상단 ---- */
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .seal{width:34px;height:34px;font-size:15px;border-radius:8px;margin:0}
+.brand b{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900}
+.who{font-size:13px;color:var(--muted)}
+.who button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;margin-left:6px;font-size:12px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;border:0;background:none;padding:8px 14px;border-radius:99px;
+  font-size:15px;font-weight:500;color:var(--muted);cursor:pointer}
+nav button.on{background:var(--ink);color:var(--paper)}
+
+main{padding:18px 0 60px}
+section.tab{display:none}
+section.tab.on{display:block}
+h2{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin:22px 0 8px}
+h2:first-child{margin-top:0}
+
+/* ---- 카드 ---- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.notice{background:var(--red-soft);border-color:transparent;color:var(--ink);font-weight:500;display:flex;gap:10px}
+.notice::before{content:"📢"}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day{text-align:center;padding:8px 2px;border-radius:10px;font-size:12px;color:var(--muted);min-height:72px}
+.day .dn{font-weight:700;font-size:13px;display:block;margin-bottom:4px}
+.day .dt{color:var(--ink);font-size:11.5px;line-height:1.35;word-break:keep-all}
+.day.today{background:var(--gold-soft);outline:2px solid var(--gold)}
+.day.today .dn{color:var(--gold)}
+.list{display:flex;flex-direction:column;gap:8px}
+.ev{display:flex;gap:12px;align-items:flex-start}
+.ev .tag{flex:0 0 auto;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--gold-soft);color:var(--gold);margin-top:2px}
+.ev .tag.today{background:var(--red);color:#fff}
+.ev b{display:block;font-size:15px}
+.ev span{font-size:13.5px;color:var(--muted)}
+.dhead{font-size:13px;font-weight:700;margin:16px 0 6px;color:var(--navy)}
+.dhead:first-child{margin-top:0}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:18px 0}
+
+/* ---- 라방 ---- */
+.live-next{background:var(--navy);color:#fff;border:0}
+.live-next .dd{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:900;line-height:1}
+.live-next .meta{opacity:.75;font-size:13px;margin-top:6px}
+.live-next b{display:block;font-size:18px;margin-top:10px}
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;margin-bottom:14px}
+.tl::before{content:"";position:absolute;left:-21px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--gold)}
+.tl.first::before{background:var(--gold)}
+.tl small{color:var(--muted);font-size:12.5px}
+.tl b{display:block;font-size:15px}
+.tl p{font-size:13.5px;color:var(--muted)}
+
+/* ---- 공략 ---- */
+.search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:15px;outline:none;margin-bottom:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chips button{border:1px solid var(--line);background:var(--paper);padding:5px 12px;border-radius:99px;font-size:13px;cursor:pointer}
+.chips button.on{background:var(--gold);border-color:var(--gold);color:#fff}
+details.g{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+details.g summary{list-style:none;padding:14px 16px;cursor:pointer;display:flex;gap:10px;align-items:center}
+details.g summary::-webkit-details-marker{display:none}
+details.g summary::after{content:"＋";margin-left:auto;color:var(--muted)}
+details.g[open] summary::after{content:"－"}
+.cat{font-size:11px;font-weight:700;color:var(--red);background:var(--red-soft);padding:2px 8px;border-radius:6px;flex:0 0 auto}
+.gbody{padding:0 16px 16px;font-size:14.5px;white-space:pre-wrap}
+.gbody small{display:block;color:var(--muted);font-size:12px;margin-top:10px}
+
+footer{text-align:center;font-size:12px;color:var(--muted);padding:10px 0 30px}
+.loading{text-align:center;color:var(--muted);padding:60px 0}
+</style>
+</head>
+<body>
+
+<!-- 로그인 화면 -->
+<div id="login" hidden>
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <div class="seal">임</div>
+    <h1 id="loginTitle">임조반 길드</h1>
+    <p class="sub">처음 한 번만 입력하면 다음부터 바로 열려요</p>
+    <div class="field">
+      <label for="nick">본캐 닉네임</label>
+      <input id="nick" name="nickname" maxlength="20" required autocomplete="nickname">
+    </div>
+    <div class="field">
+      <label for="pw">비밀번호</label>
+      <input id="pw" name="password" type="password" required autocomplete="current-password">
+    </div>
+    <button class="btn" id="loginBtn">입장하기</button>
+    <div class="err" id="loginErr"></div>
+    <div class="demo-tag" id="demoTag" hidden>데모 모드 · 비밀번호 1234</div>
+  </form>
+</div>
+
+<!-- 본 화면 -->
+<div id="app" hidden>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand"><div class="seal">임</div><b id="siteName">임조반 길드</b></div>
+        <div class="who"><span id="whoName"></span><button id="logout" type="button">로그아웃</button></div>
+      </div>
+      <nav id="nav">
+        <button data-tab="home" class="on">홈</button>
+        <button data-tab="schedule">일정</button>
+        <button data-tab="guide">공략집</button>
+        <button data-tab="live">라방 로드맵</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="loading" id="loading">불러오는 중…</div>
+
+    <section class="tab on" id="tab-home">
+      <div id="noticeBox"></div>
+      <h2>이번 주 일정</h2>
+      <div class="card"><div class="week" id="weekGrid"></div></div>
+      <h2 id="todayTitle">오늘의 이벤트</h2>
+      <div class="card"><div class="list" id="todayEvents"></div></div>
+      <h2>다음 라방</h2>
+      <div id="nextLive"></div>
+    </section>
+
+    <section class="tab" id="tab-schedule">
+      <h2>이번 주 일정</h2>
+      <div class="card"><div class="list" id="weekList"></div></div>
+      <h2>이벤트 (오늘부터)</h2>
+      <div class="card" id="eventList"></div>
+    </section>
+
+    <section class="tab" id="tab-guide">
+      <input class="search" id="search" placeholder="공략 검색 (예: 석상, 성급)">
+      <div class="chips" id="chips"></div>
+      <div id="guideList"></div>
+    </section>
+
+    <section class="tab" id="tab-live">
+      <h2>남은 라방 일정</h2>
+      <div class="card"><div class="timeline" id="liveList"></div></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG — 구글 앱스 스크립트 웹 앱 URL을 붙여넣으세요.
+   비워두면 데모 모드로 작동합니다 (비밀번호 1234).
+   ========================================================= */
+const CONFIG = {
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycby50UXAep9TnS_pUEouvTqDp2AD2XUoiE9DfoyGrw0TNyGfc4P5sinCxW9OlqN0PTp_kQ/exec',
+  RESET_HOUR: 9,           // 게임 일일 초기화 시각 (이 시각 전에는 전날로 계산)
+  REFRESH_MIN: 5           // 사이트를 열어두면 몇 분마다 새로 불러올지
+};
+
+const STORE = 'imjoban_auth';
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DAYS = ['일','월','화','수','목','금','토'];
+
+function load(){ try{ return JSON.parse(localStorage.getItem(STORE)); }catch(e){ return null; } }
+function save(v){ try{ v ? localStorage.setItem(STORE, JSON.stringify(v)) : localStorage.removeItem(STORE); }catch(e){} }
+
+/* 게임 기준 오늘 (초기화 시각 이전이면 전날) */
+function gameToday(){
+  const d = new Date();
+  if (d.getHours() < CONFIG.RESET_HOUR) d.setDate(d.getDate() - 1);
+  d.setHours(0,0,0,0);
+  return d;
+}
+function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function parseDate(s){
+  s = String(s||'').trim();
+  let m = s.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})/);
+  if (m) return new Date(+m[1], +m[2]-1, +m[3]);
+  m = s.match(/^(\d{1,2})[-./](\d{1,2})$/);           // 11/7 처럼 연도 없이 입력한 경우
+  if (m){ const y = gameToday().getFullYear(); return new Date(y, +m[1]-1, +m[2]); }
+  return null;
+}
+function label(d){ return (d.getMonth()+1)+'/'+d.getDate()+' ('+DAYS[d.getDay()]+')'; }
+function dday(d){ const n = Math.round((d - gameToday())/864e5); return n === 0 ? 'D-DAY' : 'D-'+n; }
+
+/* ---------- 데모 데이터 ---------- */
+function demoData(){
+  const t = gameToday(), f = n => { const d = new Date(t); d.setDate(d.getDate()+n); return ymd(d); };
+  return {
+    site:'임조반 길드 (데모)', notice:'데모 화면입니다. 시트를 연결하면 실제 내용이 표시돼요.',
+    weekly:[{요일:'월',내용:'주간 의뢰 초기화'},{요일:'수',내용:'길드 보스 1차'},{요일:'금',내용:'해상전 연습'},{요일:'토',내용:'길드전 오후 9시'},{요일:'일',내용:'주간 보상 마감'}],
+    events:[{날짜:f(0),제목:'전설 장수 확률 UP',내용:'이순신 출현 확률 2배'},{날짜:f(0),제목:'목상 상점 할인',내용:'호랑이 목상 30% 할인'},{날짜:f(1),제목:'해상전 보상 2배',내용:'판옥선 출전 시 추가 보상'},{날짜:f(3),제목:'주말 출석 이벤트',내용:'3일 출석 시 석상 선택권'},{날짜:f(-2),제목:'지난 이벤트',내용:'자동으로 숨겨짐'}],
+    live:[{날짜:f(-7),회차:'12회',주제:'신규 장수 소개',내용:'지난 회차'},{날짜:f(5),회차:'13회',주제:'해상전 개편 안내',내용:'거북선 스킬 변경점, Q&A'},{날짜:f(14),회차:'14회',주제:'연말 업데이트 미리보기',내용:'신규 모드, 이벤트 일정'}],
+    guides:[{카테고리:'재료',제목:'목상과 석상 교환',내용:'목상 20개 + 금화 800 = 같은 동물 석상 1개',수정일:f(0)},{카테고리:'장수',제목:'스킬 필요 성급',내용:'메인 스킬 3·5·7·9·10성\n일반 스킬 4·6·8·10·11성\n모드 스킬 4·5·6·7·8성',수정일:f(0)},{카테고리:'채집',제목:'채집 기술 재료',내용:'모든 채집 기술은 소 목상/석상 사용\nLv.2→3 목상 25 / Lv.3→4 목상 50',수정일:f(0)}],
+    updated: new Date().toLocaleString('ko-KR')
+  };
+}
+
+/* ---------- 서버 요청 ---------- */
+async function request(nick, pw){
+  if (!CONFIG.SCRIPT_URL){
+    if (pw !== '1234') return {ok:false, error:'비밀번호가 맞지 않습니다.', code:'bad_pw'};
+    return {ok:true, data: demoData()};
+  }
+  const res = await fetch(CONFIG.SCRIPT_URL, {method:'POST', body: JSON.stringify({nick, pw})});
+  return res.json();
+}
+
+/* ---------- 화면 그리기 ---------- */
+let DATA = null, CAT = '전체';
+
+function render(){
+  const d = DATA, today = gameToday(), todayStr = ymd(today);
+  $('siteName').textContent = d.site || '임조반 길드';
+  document.title = d.site || '임조반 길드';
+  $('noticeBox').innerHTML = d.notice ? '<div class="card notice">'+esc(d.notice)+'</div>' : '';
+
+  // 주간 일정 (월~일)
+  const order = ['월','화','수','목','금','토','일'];
+  const byDay = {}; (d.weekly||[]).forEach(r => { const k = String(r.요일||'').trim().charAt(0); (byDay[k] = byDay[k]||[]).push(r.내용); });
+  const todayDn = DAYS[today.getDay()];
+  $('weekGrid').innerHTML = order.map(k => '<div class="day'+(k===todayDn?' today':'')+'"><span class="dn">'+k+'</span>'+
+    (byDay[k]||[]).map(t => '<div class="dt">'+esc(t)+'</div>').join('')+'</div>').join('');
+  $('weekList').innerHTML = order.filter(k => byDay[k]).map(k =>
+    '<div class="ev"><span class="tag'+(k===todayDn?' today':'')+'">'+k+'</span><div>'+byDay[k].map(t=>'<b>'+esc(t)+'</b>').join('')+'</div></div>').join('')
+    || '<div class="empty">등록된 일정이 없어요</div>';
+
+  // 이벤트: 지난 날짜는 숨김
+  const evs = (d.events||[]).map(r => ({...r, _d: parseDate(r.날짜)})).filter(r => r._d && r._d >= today).sort((a,b) => a._d - b._d);
+  const todays = evs.filter(r => ymd(r._d) === todayStr);
+  $('todayTitle').textContent = '오늘의 이벤트 · ' + label(today);
+  $('todayEvents').innerHTML = todays.length ? todays.map(evHTML).join('') : '<div class="empty">오늘 이벤트가 없어요</div>';
+  const groups = {}; evs.forEach(r => { const k = ymd(r._d); (groups[k] = groups[k]||[]).push(r); });
+  $('eventList').innerHTML = Object.keys(groups).length ? Object.keys(groups).map(k =>
+    '<div class="dhead">'+label(parseDate(k))+(k===todayStr?' · 오늘':'')+'</div><div class="list">'+groups[k].map(evHTML).join('')+'</div>').join('')
+    : '<div class="empty">예정된 이벤트가 없어요</div>';
+
+  // 라방: 오늘 이후만
+  const lives = (d.live||[]).map(r => ({...r, _d: parseDate(r.날짜)})).filter(r => r._d && r._d >= today).sort((a,b) => a._d - b._d);
+  const n = lives[0];
+  $('nextLive').innerHTML = n ? '<div class="card live-next"><div class="dd">'+dday(n._d)+'</div><div class="meta">'+label(n._d)+' · '+esc(n.회차)+'</div><b>'+esc(n.주제)+'</b><div class="meta">'+esc(n.내용)+'</div></div>'
+    : '<div class="card"><div class="empty">예정된 라방이 없어요</div></div>';
+  $('liveList').innerHTML = lives.length ? lives.map((r,i) =>
+    '<div class="tl'+(i===0?' first':'')+'"><small>'+label(r._d)+' · '+esc(r.회차)+' · '+dday(r._d)+'</small><b>'+esc(r.주제)+'</b><p>'+esc(r.내용)+'</p></div>').join('')
+    : '<div class="empty">예정된 라방이 없어요</div>';
+
+  renderGuides();
+  $('foot').textContent = '최종 업데이트 ' + (d.updated || '');
+}
+
+function evHTML(r){
+  const isToday = ymd(r._d) === ymd(gameToday());
+  return '<div class="ev"><span class="tag'+(isToday?' today':'')+'">'+(isToday?'오늘':dday(r._d))+'</span><div><b>'+esc(r.제목)+'</b><span>'+esc(r.내용)+'</span></div></div>';
+}
+
+function renderGuides(){
+  const all = DATA.guides || [];
+  const cats = ['전체', ...new Set(all.map(g => g.카테고리).filter(Boolean))];
+  $('chips').innerHTML = cats.map(c => '<button data-cat="'+esc(c)+'" class="'+(c===CAT?'on':'')+'">'+esc(c)+'</button>').join('');
+  const q = $('search').value.trim().toLowerCase();
+  const list = all.filter(g => (CAT==='전체' || g.카테고리===CAT) && (!q || (g.제목+' '+g.내용+' '+g.카테고리).toLowerCase().includes(q)));
+  $('guideList').innerHTML = list.length ? list.map(g =>
+    '<details class="g"><summary><span class="cat">'+esc(g.카테고리)+'</span><b>'+esc(g.제목)+'</b></summary><div class="gbody">'+esc(g.내용)+
+    (g.수정일 ? '<small>최종 수정 '+esc(g.수정일)+'</small>' : '')+'</div></details>').join('')
+    : '<div class="empty">검색 결과가 없어요</div>';
+}
+
+/* ---------- 흐름 ---------- */
+function showLogin(msg){
+  $('app').hidden = true; $('login').hidden = false;
+  $('demoTag').hidden = !!CONFIG.SCRIPT_URL;
+  $('loginErr').textContent = msg || '';
+}
+
+async function enter(auth, silent){
+  try{
+    const r = await request(auth.nick, auth.pw);
+    if (!r.ok){
+      save(null);
+      showLogin(r.error || '접속에 실패했어요.');
+      return false;
+    }
+    save(auth);
+    DATA = r.data;
+    $('login').hidden = true; $('app').hidden = false; $('loading').hidden = true;
+    $('whoName').textContent = auth.nick + '님';
+    render();
+    return true;
+  }catch(e){
+    if (silent && DATA) return false;           // 자동 새로고침 실패는 조용히 넘김
+    if (!DATA) showLogin('연결에 실패했어요. 잠시 후 다시 시도해주세요.');
+    return false;
+  }
+}
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const nick = $('nick').value.trim(), pw = $('pw').value;
+  if (!nick) return;
+  $('loginBtn').disabled = true; $('loginBtn').textContent = '확인 중…';
+  await enter({nick, pw});
+  $('loginBtn').disabled = false; $('loginBtn').textContent = '입장하기';
+});
+
+$('logout').addEventListener('click', () => { save(null); DATA = null; $('pw').value = ''; showLogin(); });
+
+$('nav').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('section.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-'+b.dataset.tab));
+  window.scrollTo({top:0});
+});
+$('chips').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; CAT = b.dataset.cat; renderGuides(); });
+$('search').addEventListener('input', renderGuides);
+
+// 시작
+(function start(){
+  const auth = load();
+  if (auth && auth.nick){
+    $('app').hidden = false;
+    enter(auth);
+  } else showLogin();
+  // 열어둔 동안 자동 새로고침
+  setInterval(() => { const a = load(); if (a && !document.hidden) enter(a, true); }, CONFIG.REFRESH_MIN * 60000);
+})();
+</script>
+</body>
+</html>
