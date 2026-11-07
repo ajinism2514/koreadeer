@@ -460,7 +460,8 @@ function renderNotices(list){
 
 /* ---------- 이번 주 일정 ---------- */
 function renderWeek(rows){
-  const t=gameToday(), mon=new Date(t); mon.setDate(t.getDate()-((t.getDay()+6)%7));
+  const t=new Date(); t.setHours(0,0,0,0);   // 이번 주 일정은 자정(0시) 기준으로 요일 변경
+  const mon=new Date(t); mon.setDate(t.getDate()-((t.getDay()+6)%7));
   const by={}; (rows||[]).forEach(r=>{ const k=String(r['요일']||'').trim().charAt(0); if(!k||!r['내용']) return; (by[k]=by[k]||[]).push(r); });
   let html='';
   for(let i=0;i<7;i++){
